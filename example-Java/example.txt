@@ -1,0 +1,34 @@
+package test;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
+import java.util.Map;
+
+
+public class Test {
+
+	public static void main(String[] args) throws IOException {
+		URL url = new URL("https://www.naver.com");
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		System.out.println("getRequestMethod():" + conn.getRequestMethod());
+        System.out.println("getContentType():" + conn.getContentType());
+        System.out.println("getResponseCode():"    + conn.getResponseCode());
+        System.out.println("getResponseMessage():" + conn.getResponseMessage());
+        
+
+
+		for (Map.Entry<String, List<String>> header : conn.getHeaderFields().entrySet()) {
+            for (String value : header.getValue()) {
+                System.out.println(header.getKey() + " : " + value);
+            }
+        }
+        conn.disconnect();
+
+
+
+	}
+
+}
